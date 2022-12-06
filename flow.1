@@ -1,0 +1,33 @@
+.TH FLOW 1
+.SH NAME
+flow \- NetFlow v5 exporter
+.SH SYNOPSIS
+.B  flow
+[\fB-f \fIFILE\fR]
+[\fB-c \fINETFLOW_COLLECTOR\fR]
+[\fB-a \fIACTIVE_TIMER\fR]
+[\fB-i \fIINACTIVE_TIMER\fR]
+[\fB-m \fIFLOW_SIZE\fR]
+.SH DESCRIPTION
+.B flow
+reads captured network data (from .pcap file), generates NetFlows (version 5) and exports them to NetFlow collector
+.SH OPTIONS
+.TP
+.BR \-f " " \fIFILE\fR
+path to .pcap input file to read network data from (default: standard input)
+.TP
+.BR \-c " " \fIHOST[/PORT]
+hostname or ipv4 address (with port) of NetFlow v5 collector (default: localhost:2055)
+.TP
+.BR \-a " " \fIACTIVE_TIMER\fR
+number of seconds, after active records will be exported (default: 60) -
+export will happen, if flow has time difference in its creation and its last update greater that this value
+(NetFlow v5 Record Table: First and Last values)
+.TP
+.BR \-i " " \fIINACTIVE_TIMER\fR
+number of seconds, after inactive records will be exported (default: 10) -
+record is inactive, when time between last flow update and device boot time is greater than this value 
+(NetFlow v5 Record Table: Last value, Internal time: first packet time)
+.TP
+.BR \-m " " \fIFLOW_SIZE\fR
+number of how many flows can fit into cache (default: 1024)
